@@ -63,11 +63,19 @@ class Register(APIView):
                         status.HTTP_201_CREATED)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE', 'PATCH'])
 def index(request):
-    data = User.objects.all()
-    serilaizer = UserSerializer(data, many=True)
-    return Response(serilaizer.data)
+    if request.method == "GET":
+        data = User.objects.all()
+        serilaizer = UserSerializer(data, many=True)
+        return Response(serilaizer.data)
+    elif request.method == "POST":
+        return Response({"data": "This is a post method"})
+    elif request.method == "DELETE":
+        return Response({"data": "This is a delete method"})
+    elif request.method == "PATCH":
+        return Response({"data": "This is a PATCH method"})
+
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'])
 def person(request):
@@ -106,11 +114,14 @@ def person(request):
 
 
 class PersonalViewClassBased(APIView):
-
     def get(self, request):
         obj = Personal.objects.filter(color__isnull = False)
         serializer = PersonSerializer(obj, many= True)
         return Response(serializer.data)
+    def post(self, request):
+        return Response({"data": "This is class based post method"})
+
+
 
 class PersonalGenericView(mixins.ListModelMixin, generics.GenericAPIView ):
     queryset = Personal.objects.all()

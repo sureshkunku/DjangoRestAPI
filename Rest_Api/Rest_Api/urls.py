@@ -30,12 +30,12 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Your API",
+        title="Django Rest API",
         default_version='v1',
-        description="Your API description",
+        description="Django Rest API description",
         terms_of_service="https://www.example.com/terms/",
-        contact=openapi.Contact(email="contact@example.com"),
-        license=openapi.License(name="Your License"),
+        contact=openapi.Contact(email="suresh@gmail.com"),
+        license=openapi.License(name="@2023 Suresh License"),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
@@ -49,7 +49,7 @@ router.register(r'groups', GroupViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index', index ),  #Method based API
-    path('person', person ),
+    path('person', person ), #Method based API
     path('classview', PersonalViewClassBased.as_view()),
     path('generic', PersonalGenericView.as_view()),
     path('genriclist', PersonalView.as_view()),

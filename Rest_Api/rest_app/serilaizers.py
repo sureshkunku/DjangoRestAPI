@@ -39,12 +39,12 @@ class ColorSerializer(serializers.ModelSerializer):
 
 class PersonSerializer(serializers.ModelSerializer):
     
-    color = ColorSerializer()
+    # color = ColorSerializer()
     
     class Meta:
         model = Personal
         fields = "__all__"
-        # depth = 1 
+        depth = 1
     def validate(self, data):
         
         if data['age'] < 18:
